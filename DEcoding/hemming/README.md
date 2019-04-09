@@ -1,4 +1,4 @@
-#Hemming
+# Hemming
 This is simple of code and decode message with "Hemming" coding algorithm
 
 For EN: https://en.wikipedia.org/wiki/Hamming_code
