@@ -3,14 +3,8 @@ def hamming_coding(bin_list: list):
     :param bin_list: list of bytes (binary number represented as list)
     :return: bin_list with control bytes (coded) and powers (numbers of control bytes's indexes in bin_list) as two variables
     """
-    count_of_control_bytes = 1
-    while 2 ** count_of_control_bytes < len(bin_list):
-        count_of_control_bytes += 1
 
-    powers = [power for power in pow_generator(2, count_of_control_bytes)]
-
-    if powers[len(powers)-1] > len(bin_list):  # For understand this two strings you need to check "Hamming codes with
-        powers.pop(len(powers)-1)  # additional parity (SECDED)" or (in russian) "усеченный код Хемминга"
+    powers = get_number_of_control_bytes(len(bin_list))
 
     count_of_control_bytes = len(powers)
 
@@ -40,7 +34,24 @@ def hamming_coding(bin_list: list):
     print_matrix(r_matrix)
     print("\n")
 
-    return bin_list, powers
+    return bin_list
+
+
+def get_number_of_control_bytes(len_message: int):
+    """
+    :param len_message: count of bytes in message
+    :return: numbers of controls bytes
+    """
+    count_of_control_bytes = 1
+
+    while 2 ** count_of_control_bytes < len_message:
+        count_of_control_bytes += 1
+
+    powers = [power for power in pow_generator(2, count_of_control_bytes)]
+
+    if powers[len(powers) - 1] > len_message:  # For understand this two strings you need to check "Hamming codes with
+        powers.pop(len(powers) - 1)  # additional parity (SECDED)" or (in russian) "усеченный код Хемминга"
+    return powers
 
 
 def create_additional_matrix(cols, rows):
@@ -76,13 +87,15 @@ def create_r_values(bin_list: list, r_matrix: list):
     return r_list
 
 
-def hamming_decoding(bin_list: list, powers: list):
+def hamming_decoding(bin_list: list):
     """
     :param bin_list: list of bytes (binary number represented as list), with control bytes and probably error in
                         one byte (one list's element)
     :param powers: powers (numbers of control bytes's indexes in bin_list)
     :return: decoded bin_list - list with bytes of decoded message
     """
+    powers = get_number_of_control_bytes(len(bin_list))
+
     s_matrix = create_additional_matrix(len(powers), len(bin_list))
 
     print("Message before decoding with additional matrix and R-params values as code bytes (R params):")
