@@ -3,7 +3,7 @@ from DEcoding.hemming.math_funcs import *
 
 if __name__ == '__main__':
     message = "\nType string for coding (for example your initials), but only one type of symbols " \
-              "(for example numbers, letters for one alphabet: "
+              "(for example numbers, letters of one alphabet): "
     input_string = str(input(message))
     symbols_codes_list = []
 
