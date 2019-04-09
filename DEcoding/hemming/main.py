@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     bin_list = list(bin_str)    # transform binary message into list and set type of values in list as "int"
     bin_list = list(map(int, bin_list))
-    ret = hamming_coding(bin_list)  # get coded message
+    ret, powers = hamming_coding(bin_list)  # get coded message
 
     if add == "Y":  # add random error
         random_error = random.randint(0, len(ret)-1)
@@ -47,7 +47,7 @@ if __name__ == '__main__':
         print_list(ret)
         print("\n")
 
-    decoded = hamming_decoding(ret)  # get decoded message with fixed error, if it's exist
+    decoded = hamming_decoding(ret, powers)  # get decoded message with fixed error, if it's exist
     decoded_str = ""
     bite_str = ""
 

@@ -34,7 +34,7 @@ def hamming_coding(bin_list: list):
     print_matrix(r_matrix)
     print("\n")
 
-    return bin_list
+    return bin_list, powers
 
 
 def get_number_of_control_bites(len_message: int):
@@ -49,8 +49,17 @@ def get_number_of_control_bites(len_message: int):
 
     powers = [power for power in pow_generator(2, count_of_control_bites)]
 
-    if powers[len(powers) - 1] > len_message:  # For understand this two strings you need to check "Hamming codes with
-        powers.pop(len(powers) - 1)  # additional parity (SECDED)" or (in russian) "усеченный код Хемминга"
+    """For understand this strings you need to check "Hamming codes with additional parity (SECDED)" or 
+    (in russian) "усеченный код Хемминга" """
+    print(powers)
+    print(len_message)
+    print(len(powers))
+
+    # if (powers[-1] > len_message) and (powers[-2] >= len_message + len(powers)):
+    #     powers.pop(-1)
+    if powers[-1] > len_message and (powers[-1] - 1) != len_message:
+        powers[-1] = len_message
+    print(powers)
     return powers
 
 
@@ -87,14 +96,13 @@ def create_r_values(bin_list: list, r_matrix: list):
     return r_list
 
 
-def hamming_decoding(bin_list: list):
+def hamming_decoding(bin_list: list, powers: list):
     """
     :param bin_list: list of bites (binary number represented as list), with control bites and probably error in
                         one bite (one list's element)
     :param powers: powers (numbers of control bites's indexes in bin_list)
     :return: decoded bin_list - list with bites of decoded message
     """
-    powers = get_number_of_control_bites(len(bin_list))
 
     s_matrix = create_additional_matrix(len(powers), len(bin_list))
 
