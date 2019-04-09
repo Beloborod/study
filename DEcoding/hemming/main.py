@@ -60,3 +60,4 @@ if __name__ == '__main__':
 
     print("Decoded message:")
     print(decoded_str)
+    input()
