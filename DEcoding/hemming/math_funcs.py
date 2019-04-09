@@ -27,7 +27,7 @@ def hamming_coding(bin_list: list):
 
     r_values = create_r_values(bin_list, r_matrix)
 
-    print(f"R params: {r_values}\n")
+    print(f"R params (first is low order): {r_values}\n")
 
     index = 0
 
@@ -92,7 +92,7 @@ def hamming_decoding(bin_list: list, powers: list):
 
     s_values = create_r_values(bin_list, s_matrix)
 
-    print(f"S params: {s_values}\n")
+    print(f"S params (first is low order): {s_values}\n")
 
     if sum(s_values) != 0:
         bin_str = ""
