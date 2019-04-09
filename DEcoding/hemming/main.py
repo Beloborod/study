@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     add = None
     while add != "" and add != "Y" and add != "N":
-        add = str(input("\nAdd a random error in message? ('y'/'n' or 'enter' for 'n')"))
+        add = str(input("\nAdd a random error in message? ('y'/'n' or 'enter' for 'n'): "))
         if add == "":
             add = "N"
         add = add.upper()
