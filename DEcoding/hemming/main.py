@@ -33,7 +33,7 @@ if __name__ == '__main__':
     if add == "Y":
         random_error = random.randint(0, len(ret)-1)
 
-        print(f"Error in byte with number: {random_error+1}\n")
+        print(f"Error in bite with number: {random_error+1}\n")
 
         if ret[random_error] == 1:
             ret[random_error] = 0
@@ -46,17 +46,17 @@ if __name__ == '__main__':
 
     decoded = hamming_decoding(ret, powers)
     decoded_str = ""
-    byte_str = ""
+    bite_str = ""
 
     print("Message after decoding and fix error:")
     print_list(decoded)
     print("\n")
 
-    for byte in decoded:
-        byte_str += str(byte)
-        if len(byte_str) == symbols_length:
-            decoded_str += chr(int(byte_str, 2))
-            byte_str = ""
+    for bite in decoded:
+        bite_str += str(bite)
+        if len(bite_str) == symbols_length:
+            decoded_str += chr(int(bite_str, 2))
+            bite_str = ""
 
     print("Decoded message:")
     print(decoded_str)
