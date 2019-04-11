@@ -16,7 +16,6 @@ if __name__ == '__main__':
         if add == "":
             add = "N"
         add = add.upper()
-        print(add)
 
     for symbol in input_string:  # get symbol's code, transformation into binary and delete "0b" prefix
         symbols_codes_list.append(bin(ord(symbol))[2:])
@@ -31,7 +30,7 @@ if __name__ == '__main__':
 
     bin_list = list(bin_str)    # transform binary message into list and set type of values in list as "int"
     bin_list = list(map(int, bin_list))
-    ret, powers = hamming_coding(bin_list)  # get coded message
+    ret = hamming_coding(bin_list)  # get coded message
 
     if add == "Y":  # add random error
         random_error = random.randint(0, len(ret)-1)
@@ -47,7 +46,7 @@ if __name__ == '__main__':
         print_list(ret)
         print("\n")
 
-    decoded = hamming_decoding(ret, powers)  # get decoded message with fixed error, if it's exist
+    decoded = hamming_decoding(ret)  # get decoded message with fixed error, if it's exist
     decoded_str = ""
     bite_str = ""
 

@@ -1,7 +1,7 @@
 def hamming_coding(bin_list: list):
     """
     :param bin_list: list of bites (binary number represented as list)
-    :return: bin_list with control bites (coded) and powers (numbers of control bites's indexes in bin_list) as two variables
+    :return: bin_list with control bites (coded)
     """
 
     powers = get_number_of_control_bites(len(bin_list))
@@ -34,7 +34,7 @@ def hamming_coding(bin_list: list):
     print_matrix(r_matrix)
     print("\n")
 
-    return bin_list, powers
+    return bin_list
 
 
 def get_number_of_control_bites(len_message: int):
@@ -56,6 +56,18 @@ def get_number_of_control_bites(len_message: int):
     if powers[-1] > len_message and (powers[-1] - 1) != len_message:
         powers[-1] = len_message
     return powers
+
+
+def get_numbers_of_control_bites_for_decoding(len_message: int):
+    list_to_return = []
+    for power in pow_generator(2):
+        if ((sum(list_to_return) + power) < len_message) or (power <= (len_message - len(list_to_return))):
+            list_to_return.append(power)
+        elif (len_message - len(list_to_return)) > list_to_return[-1]:
+            list_to_return.append((len_message - len(list_to_return))-1)
+            return list_to_return
+        else:
+            return list_to_return
 
 
 def create_additional_matrix(cols, rows):
@@ -91,13 +103,14 @@ def create_r_values(bin_list: list, r_matrix: list):
     return r_list
 
 
-def hamming_decoding(bin_list: list, powers: list):
+def hamming_decoding(bin_list: list):
     """
     :param bin_list: list of bites (binary number represented as list), with control bites and probably error in
                         one bite (one list's element)
-    :param powers: powers (numbers of control bites's indexes in bin_list)
     :return: decoded bin_list - list with bites of decoded message
     """
+
+    powers = get_numbers_of_control_bites_for_decoding(len(bin_list))
 
     s_matrix = create_additional_matrix(len(powers), len(bin_list))
 
