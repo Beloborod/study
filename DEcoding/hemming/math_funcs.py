@@ -48,18 +48,13 @@ def get_number_of_control_bites(len_message: int):
         count_of_control_bites += 1
 
     powers = [power for power in pow_generator(2, count_of_control_bites)]
+    print(powers)
 
     """For understand this strings you need to check "Hamming codes with additional parity (SECDED)" or 
     (in russian) "усеченный код Хемминга" """
-    print(powers)
-    print(len_message)
-    print(len(powers))
 
-    # if (powers[-1] > len_message) and (powers[-2] >= len_message + len(powers)):
-    #     powers.pop(-1)
     if powers[-1] > len_message and (powers[-1] - 1) != len_message:
         powers[-1] = len_message
-    print(powers)
     return powers
 
 
